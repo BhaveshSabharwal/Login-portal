@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 40vh;
+        }
+
+        .left-side {
+            color: white;
+            width: 50%;
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            font-weight: 400;
+            padding: 0 20px;
+        }
+
+        .left-side img {
+            width: 250px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .left-side p {
+            font-family: "Noto Sans", sans-serif;
+            font-weight: 700;
+            font-size: 80px;
+            margin: 0;
+
+        }
+
+        .background {
+            background-image: url('https://static.vecteezy.com/system/resources/previews/008/020/658/non_2x/abstract-technology-futuristic-concept-geometric-pattern-vibrant-color-background-vector.jpg');
+            background-repeat: no-repeat;
+            filter: blur(5px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+
+        }
+
+        .login-container:hover {
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 2rem;
+            color: #3d499d;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 85%;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-form input[type="text"]:focus,
+        .login-form input[type="password"]:focus {
+            border-color: #1ba9d4;
+            outline: none;
+        }
+
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #1ba9d4;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-form input[type="submit"]:hover {
+            background-color: #1483b4;
+        }
+
+        .login-form a {
+            color: #1ba9d4;
+            text-decoration: none;
+        }
+
+        .login-form a:hover {
+            color: #004d40;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 14px;
+            margin-bottom: 10px;
+            visibility: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .left-side {
+                width: 100%;
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+
+            .login-container {
+                margin-top: 0;
+                max-width: 100%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="left-side">
+        <div>Welcome to </div>
+        <img src="./images/logo.png" alt="logo">
+        <p>Peaks Automation</p>
+
+    </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form class="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+            <div class="error-message" id="error-message">Invalid username or password</div>
+        </form>
+    </div>
+
+    <script>
+        const users = require('./users.json');
+
+        const loginForm = document.querySelector('.login-form');
+        const errorMessage = document.getElementById('error-message');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.querySelector('#username').value;
+            const password = document.querySelector('#password').value;
+
+            let userType;
+
+            // Check if the user is a manager
+            const manager = users.managers.find((manager) => manager.username === username && manager.password === password);
+            if (manager) {
+                userType = 'manager';
+            }
+            // Check if the user is an employee
+            else {
+                const employee = users.employees.find((employee) => employee.username === username && employee.password === password);
+                if (employee) {
+                    userType = 'employee';
+                }
+                // If the user is not found in either set, display an error message
+                else {
+                    errorMessage.style.visibility = 'visible';
+                    return;
+                }
+            }
+
+            // If the user is authenticated, redirect them to the appropriate page
+            if (userType === 'manager') {
+                window.location.href = 'manager-dashboard.html';
+            } else if (userType === 'employee') {
+                window.location.href = 'employee-dashboard.html';
+            }
+        });
+    </script>
+</body>
+
+</html>

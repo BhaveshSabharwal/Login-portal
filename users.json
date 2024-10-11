@@ -1,0 +1,22 @@
+{
+    "managers": [
+        {
+            "username": "manager1",
+            "password": "password1"
+        },
+        {
+            "username": "manager2",
+            "password": "password2"
+        }
+    ],
+    "employees": [
+        {
+            "username": "employee1",
+            "password": "password3"
+        },
+        {
+            "username": "employee2",
+            "password": "password4"
+        }
+    ]
+}
