@@ -1,0 +1,95 @@
+/* Navigation Menu */
+nav {
+    width: 22vw;
+    height: 94vh;
+    background-color: #472f8e;
+    margin: auto 4vh;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 3vh;
+    /* Fixed at the top */
+    left: 2vh;
+    /* Fixed at the left */
+    opacity: 1;
+}
+
+.nav-logo img {
+    width: 12vw;
+    display: block;
+    margin: 30px auto;
+    margin-bottom: 70px;
+}
+
+.nav-buttons p {
+    font-family: "Baloo Paaji 2", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px 0;
+    width: 80%;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 27px;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    transition: top 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Swipe up effect when hovering */
+.nav-buttons p:hover {
+    background-color: #FFF;
+    color: #333;
+    top: -5px;
+    /* Swipe up */
+}
+
+/* Swipe down effect for active state */
+.nav-buttons p.active {
+    background-color: #1ba9d4;
+    color: white;
+    top: 5px;
+    /* Swipe down */
+}
+
+.background {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-repeat: repeat;
+    background-image: url('./images/bg-pattern.png');
+}
+
+/* Main content (pages) */
+main {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    width: 70vw;
+    left: 28vw;
+    /* Positioned next to the navigation */
+    top: 5vh;
+    transition: opacity 0.5s ease;
+    /* Smooth fade effect */
+    padding: 20px;
+}
+
+main.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Ensure the selected content is visible */
+main.fade-in {
+    display: block;
+    opacity: 1;
+}
+
+main.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
