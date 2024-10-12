@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="employee.css">
+    <link rel="stylesheet" href="Attendence.css">
+    <title>Dashboard</title>
+    <style>
+        body {}
+
+        /*Navigation Menu*/
+        nav {
+            width: 22vw;
+            height: 94vh;
+            background-color: #472f8e;
+            margin: auto 4vh;
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            margin-right: 8vh;
+            position: fixed;
+            top: -100px;
+            /* Initially hidden for slide-down effect */
+            opacity: 0;
+            transition: top 0.5s ease, opacity 0.5s ease;
+        }
+
+        /* Slide-down when page loads */
+        nav.active {
+            top: 0;
+            opacity: 1;
+        }
+
+        .nav-logo img {
+            width: 12vw;
+            display: block;
+            margin: 30px auto;
+            margin-bottom: 70px;
+        }
+
+        .nav-buttons p {
+            font-family: "Baloo Paaji 2", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+            height: auto;
+            padding: 10px 0;
+            font-size: 20px;
+            width: 80%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 3px;
+            border-radius: 27px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-buttons p:hover {
+            background-color: #FFF;
+            color: #333;
+        }
+
+        .nav-buttons p.active {
+            background-color: #1ba9d4;
+            color: white;
+        }
+
+        .background {
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-repeat: repeat;
+            background-image: url('./images/bg-pattern.png');
+        }
+
+        main {
+            display: none;
+            opacity: 0;
+            position: absolute;
+            width: 75vw;
+            left: 100%;
+            /* Start from the right for swipe effect */
+            top: 5vh;
+            transition: opacity 0.5s ease, left 0.5s ease;
+            padding: 20px;
+        }
+
+        main.active {
+            display: block;
+            left: 24vw;
+            /* Position next to the sidebar */
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background"></div>
+    <nav>
+        <div class="nav-logo"><img src="./images/logo.png" alt=""></div>
+        <div class="nav-buttons" style="color: white;">
+            <p onclick="showMain('dashboard')" class="active">Dashboard</p>
+            <p onclick="showMain('planner')">Planner</p>
+            <p onclick="showMain('attendance')">Attendance</p>
+            <p onclick="showMain('profile')">Profile</p>
+            <p onclick="showMain('settings')">Settings</p>
+        </div>
+    </nav>
+
+    <main id="dashboard" class="active">
+
+        <section>
+            <div class="top-nav">
+                <div class="welcome">Hello <p>Bhavesh</p> . . . </div>
+                <div class="search"><input type="text" name="search" id="search" placeholder="Search"></div>
+            </div>
+            <div class="profile-card">
+                <div class="profile-image"><img src="./images/avatar.png" alt=""></div>
+                <div class="profile-details">
+                    <p>Name :</p>
+                    <p>Phone :</p>
+                    <p>Email :</p>
+                    <p>Employee ID :</p>
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="contact-card" id="Manager-contact">
+                    <div class="card-content">
+                        <div class="profile-details">
+                            <h6>Manager</h6>
+                            <p>Name :</p>
+                            <p>Phone :</p>
+                            <p>Email :</p>
+
+                        </div>
+                    </div>
+                    <div class="message">
+                        <input type="text" name="message" id="message" placeholder="Send Message ...">
+                    </div>
+                </div>
+                <div class="contact-card" id="TeamLead-contact">
+                    <div class="card-content">
+                        <div class="profile-details">
+                            <h6>Team Leader</h6>
+                            <p>Name :</p>
+                            <p>Phone :</p>
+                            <p>Email :</p>
+
+                        </div>
+                    </div>
+                    <div class="message">
+                        <input type="text" name="message" id="message" placeholder="Send Message ...">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="planner">
+        <!-- Planner content here -->
+        <h1>Planner</h1>
+        <p>This is the planner page.</p>
+    </main>
+
+    <main id="attendance">
+        <section>
+            <div class="top-nav">
+                <div class="welcome">Hello <p>Bhavesh</p> . . . </div>
+                <div class="search"><input type="text" name="search" id="search" placeholder="Search"></div>
+            </div>
+
+            <div class="calendar">
+                <iframe
+                    src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FKolkata&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4tZ2IuaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%2333B679&color=%230B8043&color=%230B8043"
+                    style="border-width:0" width="1000px" height="600" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <main id="profile">
+        <!-- Profile content here -->
+        <h1>Profile</h1>
+        <p>This is the profile page.</p>
+    </main>
+
+    <main id="settings">
+        <!-- Settings content here -->
+        <h1>Settings</h1>
+        <p>This is the settings page.</p>
+    </main>
+
+    <script>
+        // Slide down the navigation when page loads
+        window.onload = function () {
+            document.querySelector('nav').classList.add('active');
+        };
+
+        function showMain(id) {
+            // Hide all main elements
+            var mains = document.querySelectorAll('main');
+            mains.forEach(function (main) {
+                main.classList.remove('active');
+                main.style.left = '100%'; // Reset position for swipe effect
+                main.style.opacity = 0; // Make invisible for fade effect
+            });
+
+            // Display the selected main element
+            setTimeout(function () {
+                var selectedMain = document.getElementById(id);
+                selectedMain.classList.add('active');
+            }, 100); // Delay for smooth transition
+
+            // Update active navigation link
+            var navLinks = document.querySelectorAll('.nav-buttons p');
+            navLinks.forEach(function (link) {
+                link.classList.remove('active');
+                if (link.textContent.toLowerCase() === id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
